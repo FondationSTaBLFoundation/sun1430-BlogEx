@@ -61,11 +61,11 @@ instance Controller PostsController where
         redirectTo PostsAction
 
     action UvAction { postId } = do
-        {-let vote = newRecord @Vote
+        let vote = newRecord @Vote
                 |> set #postId postId
                 |> set #ifUp True
                 |> set #userId 
-        vote <- vote |> createRecord-}
+                |> createRecord
         redirectTo ShowPostAction { postId }
 
 buildPost post = post
