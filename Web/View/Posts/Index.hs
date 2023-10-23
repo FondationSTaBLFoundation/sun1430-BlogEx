@@ -1,16 +1,17 @@
 module Web.View.Posts.Index where
 import Web.View.Prelude
+import Data.Maybe
 
 data IndexView = IndexView { posts :: [Post]  }
 
 instance View IndexView where
     html IndexView { .. } = [hsx|
         {breadcrumb}
-        {case currentUserOrNothing of
-                Just currentUser -> 
-                    <h1> Hello {currentUser.email}<a class="js-delete js-delete-no-confirm" href={DeleteSessionAction}>Logout </a> </h1>
-                Nothing -> 
-                    <h1> login in </h1>}
+        <div>
+        <p>
+            {maybe "not sign in" (\value -> "Hello: " <> value) currentUser.email}
+        </p>
+        </div>
         <h1>Blog Posts<a href={pathTo NewPostAction} class="btn btn-primary ms-4">+ New</a></h1>
         <div class="table-responsive">
             <table class="table">
