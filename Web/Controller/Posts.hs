@@ -64,7 +64,7 @@ instance Controller PostsController where
         let vote = newRecord @Vote
                 |> set #postId postId
                 |> set #ifUp True
-                |> set #userId 
+                |> set #userId currentUser.email
                 |> createRecord
         redirectTo ShowPostAction { postId }
 
